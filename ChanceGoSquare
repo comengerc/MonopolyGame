@@ -1,0 +1,56 @@
+public class ChanceGoSquare extends ChanceCard {
+
+	int movedSquare = 0;
+	boolean isRelative = false;
+	
+	public ChanceGoSquare(String name) {
+		super(name);
+	}
+	
+	public ChanceGoSquare(String name, int movedSquare, boolean isRelative) {
+		super(name);
+		this.movedSquare = movedSquare;
+		this.isRelative = isRelative;
+		
+	}
+	
+	
+	public void cardAction(Player player,Square locationSquare, Board board) {
+		
+		int prevLocation = player.getPiece().getlocation();
+		int currentLocation;
+		
+		if(isRelative && movedSquare != 0) {
+			System.out.println("\n" + this.getName());
+			int location = player.getPiece().getlocation() + movedSquare;
+			location = Math.floorMod(location, 40);  
+			System.out.println("\t\t\t\t\t location" + location);
+			player.getPiece().setlocation(location);
+			
+		}else if(!isRelative && movedSquare != 0) {
+			System.out.println("\n" + this.getName());
+			player.getPiece().setlocation(movedSquare);
+			
+		}else if(!isRelative && movedSquare == 0) {
+			if(       Math.abs(player.getPiece().getlocation() -12) < Math.abs(player.getPiece().getlocation() -28) ) {
+				System.out.println("\n" + this.getName());
+				player.getPiece().setlocation(12);
+			}
+			else {
+				System.out.println("\n" + this.getName());
+				player.getPiece().setlocation(28);
+			}
+		}
+		
+		currentLocation = player.getPiece().getlocation();
+		
+		if(currentLocation - prevLocation < 0) {
+			player.setBalance(player.getBalance() + board.startingMoney);
+		}
+		
+		
+		Square currentLocationSquare = board.getObject(player.getPiece().getlocation());
+		
+		currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+	}
+}

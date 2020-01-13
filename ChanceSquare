@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+public class ChanceSquare extends Square {
+
+	private ArrayList<ChanceCard> ChanceCards = new ArrayList<ChanceCard>(8);
+	private String name = "Sans Karesi";
+	private ChanceCard card;
+
+	public ChanceSquare(ArrayList<ChanceCard> ChanceCards) {
+		
+		this.ChanceCards = ChanceCards;
+	}
+	
+	public ChanceCard pickCard() {
+		ChanceCard pickedCard = ChanceCards.get(0);
+        Collections.shuffle(ChanceCards);
+      
+        return pickedCard;
+	}
+
+	public void landedOn(Player player,Square locationSquare, Board board) {
+		ChanceCard pickedCard = pickCard(); 
+		System.out.println("\n\n\n -------------------------\n\n\n" + player.getName() + " is picking card" + ", card is " + pickedCard.getName() + "--------------------------------\n\n" );
+		pickedCard.cardAction(player, locationSquare, board);
+	}
+
+	public ArrayList<ChanceCard> getChanceCards(){
+		return ChanceCards;
+	}
+
+	public void setChanceCards(ArrayList<ChanceCard> ChanceCards ){
+		this.ChanceCards = ChanceCards;
+	}
+	
+
+}
+

@@ -1,0 +1,20 @@
+public abstract class ChanceCard  {
+
+	private String name = "Chance Card";
+	
+	public ChanceCard(String name){
+		this.setName(name);
+	}
+
+	public abstract void cardAction(Player player,Square locationSquare, Board board);
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
+

@@ -1,0 +1,59 @@
+public class ChanceGetMoney extends ChanceCard {
+
+	int moneyAmount=0;
+	
+	public ChanceGetMoney(String name) {
+		super(name);
+	}
+	
+	public ChanceGetMoney(String name, int moneyAmount) {
+		super(name);
+		this.moneyAmount = moneyAmount;
+	}
+
+	public void cardAction(Player player,Square locationSquare, Board board) {
+		
+		
+		if(this.getName().equals("Get 50$ from each player")) {
+
+			System.out.println("\n\n\n");
+			System.out.println(player.getName() + " is getting money from all of the players");
+			for(Player p: board.getListP() ) {
+				if(p != player) {
+					
+					p.setBalance(  p.getBalance() - moneyAmount  );
+					player.setBalance(player.getBalance() + moneyAmount);
+				}
+			}	
+		}
+//		else if(this.getName().equals("Get double at train station")) {
+//			System.out.println("\n\n\n get double at train station");
+			
+//			if(board.getObject(5).getOwner() == player) {
+//			
+//				board.getObject(5).setRentPrice(2*board.getObject(5).getRentPrice());
+//			}	
+//			if(board.getObject(15).getOwner() == player) {
+//					
+//				board.getObject(15).setRentPrice(2*board.getObject(15).getRentPrice());
+//			}
+//			if(board.getObject(25).getOwner() == player) {
+//					
+//				board.getObject(25).setRentPrice(2*board.getObject(25).getRentPrice());
+//			}
+//			if(board.getObject(35).getOwner() == player) {
+//
+//				board.getObject(35).setRentPrice(2*board.getObject(35).getRentPrice());
+//			}
+				
+//		}
+		else if(this.getName().equals("You rent a house")) {
+			System.out.println("\n\n\n You rent a house and earn 120");
+			
+			
+			player.setBalance(player.getBalance() + 120);
+			
+		}
+		
+	}
+}

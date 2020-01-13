@@ -1,0 +1,21 @@
+public class ChanceGoJail extends ChanceCard{
+	
+	
+	int movedSquare = 10;
+	public ChanceGoJail(String name) {
+		super(name);
+	}
+
+	public void cardAction(Player player,Square locationSquare, Board board) {
+		
+		if(player.getPiece().getlocation() == 17 && player.getPiece().getlocation() == 22 &&
+						player.getPiece().getlocation() == 33 && player.getPiece().getlocation() == 36  ) {
+			player.setBalance(player.getBalance() -  board.startingMoney       );
+		}
+		player.getPiece().setlocation(10);		
+		Square currentLocationSquare=board.getObject(player.getPiece().getlocation());
+		
+		currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+		
+	}
+}

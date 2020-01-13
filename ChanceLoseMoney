@@ -1,0 +1,108 @@
+public class ChanceLoseMoney extends ChanceCard {
+
+	int moneyAmount=0;
+	
+	public ChanceLoseMoney(String name) {
+		super(name);
+	}
+	
+	public ChanceLoseMoney(String name, int moneyAmount) {
+		super(name);
+		this.moneyAmount=moneyAmount;
+	}
+	
+	public void cardAction(Player player,Square locationSquare, Board board) {
+		
+		int prevLocation = player.getPiece().getlocation();
+		int currentLocation;
+		
+		if(this.getName().equals("Give 100$ to each player")) {
+			
+			System.out.println("\n" + player.getName() + " is giving money to all the players");
+			for(Player p: board.getListP() ) {
+				if(p != player) {
+					
+					p.setBalance(  p.getBalance() + moneyAmount  );
+					player.setBalance(player.getBalance() - moneyAmount);
+				}
+			}		
+		}
+		
+		else if(this.getName().equals("Go to nearest forward rail road and give rent double")) {
+			
+			
+			System.out.println("\n" + player.getName() + "is going forvard to nearest rail road");
+			//These if elses just for the most near square for wanted rail road.
+			if(     player.getPiece().getlocation() == 2)  {
+				System.out.println("\n\t\t\t\t" + this.getName());
+				player.getPiece().setlocation(5);
+				
+				int railRoadPrice = board.getObject(player.getPiece().getlocation()).getRentPrice();
+				player.setBalance(player.getBalance() - railRoadPrice);
+				Player owner = board.getObject(player.getPiece().getlocation()).getOwner();
+				owner.setBalance(owner.getBalance() + railRoadPrice);
+				Square currentLocationSquare = board.getObject(player.getPiece().getlocation());
+				currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+			}			
+			else if(     player.getPiece().getlocation() == 7)  {
+				System.out.println("\n\t\t\t\t" + this.getName());
+				player.getPiece().setlocation(15);
+				int railRoadPrice = board.getObject(player.getPiece().getlocation()).getRentPrice();
+				player.setBalance(player.getBalance() - railRoadPrice);
+				Player owner = board.getObject(player.getPiece().getlocation()).getOwner();
+				owner.setBalance(owner.getBalance() + railRoadPrice);
+				Square currentLocationSquare = board.getObject(player.getPiece().getlocation());
+				currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+			}			
+			else if(     player.getPiece().getlocation() == 17)  {
+				System.out.println("\n\t\t\t\t" + this.getName());
+				player.getPiece().setlocation(25);	
+				int railRoadPrice = board.getObject(player.getPiece().getlocation()).getRentPrice();
+				player.setBalance(player.getBalance() - railRoadPrice);
+				Player owner = board.getObject(player.getPiece().getlocation()).getOwner();
+				owner.setBalance(owner.getBalance() + railRoadPrice);
+				Square currentLocationSquare = board.getObject(player.getPiece().getlocation());
+				currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+			}		
+			else if(     player.getPiece().getlocation() == 22)  {
+				System.out.println("\n\t\t\t\t" + this.getName());
+				player.getPiece().setlocation(25);
+				int railRoadPrice = board.getObject(player.getPiece().getlocation()).getRentPrice();
+				player.setBalance(player.getBalance() - railRoadPrice);
+				Player owner = board.getObject(player.getPiece().getlocation()).getOwner();
+				owner.setBalance(owner.getBalance() + railRoadPrice);
+				Square currentLocationSquare = board.getObject(player.getPiece().getlocation());
+				currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+			}		
+			else if(     player.getPiece().getlocation() == 33)  {
+				System.out.println("\n\t\t\t\t" + this.getName());
+				player.getPiece().setlocation(35);
+				int railRoadPrice = board.getObject(player.getPiece().getlocation()).getRentPrice();
+				player.setBalance(player.getBalance() - railRoadPrice);
+				Player owner = board.getObject(player.getPiece().getlocation()).getOwner();
+				owner.setBalance(owner.getBalance() + railRoadPrice);
+				Square currentLocationSquare = board.getObject(player.getPiece().getlocation());
+				currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+			}		
+			else if(     player.getPiece().getlocation() == 36)  {
+				System.out.println("\n\t\t\t\t" + this.getName());
+				player.getPiece().setlocation(5);
+				int railRoadPrice = board.getObject(player.getPiece().getlocation()).getRentPrice();
+				player.setBalance(player.getBalance() - railRoadPrice);
+				Player owner = board.getObject(player.getPiece().getlocation()).getOwner();
+				owner.setBalance(owner.getBalance() + railRoadPrice);
+				Square currentLocationSquare = board.getObject(player.getPiece().getlocation());
+				currentLocationSquare.landedOn(player, player.getPiece().getLocationSquare(), board);
+			}		
+		}
+		
+		currentLocation = player.getPiece().getlocation();
+		
+		if(currentLocation - prevLocation < 0) {
+			player.setBalance(player.getBalance() + board.startingMoney);
+		}
+		
+	}
+
+	
+}
